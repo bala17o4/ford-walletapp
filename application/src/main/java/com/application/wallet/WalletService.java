@@ -12,6 +12,6 @@ public interface WalletService {
     Double addFundsToWalletById(Integer walletId,Double amount)throws WalletException;
     Double withdrawFundsFromWalletById(Integer walletById,Double amount) throws WalletException;
     Boolean fundTransfer(Integer fromWalletId,Integer toWalletId,Double amount)throws WalletException;
-gi
+
     Collection<WalletDto> getAllWallets();
 }
