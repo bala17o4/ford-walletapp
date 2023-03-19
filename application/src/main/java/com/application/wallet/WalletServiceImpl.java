@@ -26,6 +26,15 @@ public class WalletServiceImpl implements WalletService{
         }
         return foundWallet.get();
     }
+
+//    @Override
+//    public WalletDto getWalletByName(String walletName) throws WalletException{
+//        Optional<WalletDto> foundWallet = this.walletJpaRepository.findById(walletName);
+//        if(foundWallet==null){
+//            throw new WalletException("Wallet name is not found");
+//        }
+//        return foundWallet.get();
+//    }
 //
     @Override
     public WalletDto updateWallet(WalletDto walletDto) throws WalletException{
@@ -34,7 +43,7 @@ public class WalletServiceImpl implements WalletService{
         }
         return this.walletJpaRepository.save(walletDto);
     }
-//
+
     @Override
     public WalletDto deleteWalletById(Integer walletId) throws WalletException{
         Optional<WalletDto> foundWallet =this.walletJpaRepository.findById(walletId);
@@ -45,7 +54,7 @@ public class WalletServiceImpl implements WalletService{
         this.walletJpaRepository.delete(wallet);
         return wallet;
     }
-//
+
     @Override
     public Double addFundsToWalletById(Integer walletId, Double amountToBeAdded) throws WalletException{
         Optional<WalletDto> fundwallet = this.walletJpaRepository.findById(walletId);
@@ -59,7 +68,7 @@ public class WalletServiceImpl implements WalletService{
         this.walletJpaRepository.save(fundwallet.get());
         return newBalance;
     }
-//
+
     @Override
     public Double withdrawFundsFromWalletById(Integer walletId, Double amount) throws WalletException{
         Optional<WalletDto> tempwallet = this.walletJpaRepository.findById(walletId);
@@ -74,11 +83,11 @@ public class WalletServiceImpl implements WalletService{
         this.walletJpaRepository.save(tempwallet.get());
         return withdrawAmount;
     }
-//
+
     @Override
-    public Boolean fundTransfer(Integer fromWalletId, Integer toWalletId, Double amountToTransfer) throws WalletException{
-        Optional<WalletDto> fromWallet = this.walletJpaRepository.findById(fromWalletId);
-        Optional<WalletDto> toWallet = this.walletJpaRepository.findById(toWalletId);
+    public Boolean fundTransfer(Integer fromWalletid, Integer toWalletid, Double amountToTransfer) throws WalletException{
+        Optional<WalletDto> fromWallet = this.walletJpaRepository.findById(fromWalletid);
+        Optional<WalletDto> toWallet = this.walletJpaRepository.findById(toWalletid);
 
         if(fromWallet == null){
             throw new WalletException("From Wallet not exist");

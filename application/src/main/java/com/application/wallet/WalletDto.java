@@ -3,7 +3,9 @@ package com.application.wallet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
 @Entity
@@ -12,21 +14,26 @@ public class WalletDto {
 
 
 
-    @NotNull(message = "Id cannot be null")
+//    @NotNull(message = "Id cannot be null")
     @Id
+    @GeneratedValue
     private Integer id;
+
     @NotBlank(message = "Name should not be blank")
     @Pattern(regexp = "[A-Za-z0-9]{3,16}",message = "Name should be between 3-16 characters and no special characters allowed")
     private String name;
     @Value("1000.0")
     private Double balance;
 
-//    @NotBlank(message = "Password should not be blank")
-    @Pattern(regexp = "^[A-Za-z0-9!@#&()–[{}]:;',?/*~$^+=<>]{8,20}")
-    private String password;
-
     @Email(message = "Enter valid email")
     private String email;
+
+    @NotBlank(message = "Password should not be blank")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&*()_+\\-={}\\[\\]|;:'\'<>,./?])(?=.*[a-zA-Z]).{8,}$",
+            message = "Password should contain one lowercase, one uppercase character,atleast one digit and one special character, it must not contain whitespace and must be minimum 8 characters long.")
+    private String password;
+
+
 
     public WalletDto(Integer id, String name, Double balance, String email, String password){
         this.id = id;
